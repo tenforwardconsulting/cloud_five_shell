@@ -8,6 +8,18 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     compileSdkVersion 27
+
+    if (keystorePropertiesFile.exists()) {
+        signingConfigs {
+            release {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
+
     defaultConfig {
         applicationId "com.cloudfiveapp.shell"
         minSdkVersion 15
@@ -25,17 +37,8 @@ android {
             }
         }
     }
+
     flavorDimensions "default"
-    if (keystorePropertiesFile.exists()) {
-        signingConfigs {
-            release {
-                storeFile file(keystoreProperties['storeFile'])
-                storePassword keystoreProperties['storePassword']
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-            }
-        }
-    }
 }
 
 dependencies {
